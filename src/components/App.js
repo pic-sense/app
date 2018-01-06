@@ -158,7 +158,6 @@ class App extends Component {
     this.getVoices();
   };
 
-
   render() {
     return (
       <div className="App">
