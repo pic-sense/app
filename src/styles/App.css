@@ -44,3 +44,49 @@ button:hover
   color: white;
   padding: 1rem;
 }
+
+#snap i, #submit i, #delete i {
+  font-size: 42px;
+}
+
+#button.snapped {
+  transform: translateY(100%);
+  transition: transform 0.4s;
+}
+
+#canvasButtons {
+  display: flex;
+  justify-content: space-around;
+  margin: 0rem auto;
+  transform: translateY(-150%);
+}
+
+#submit, #delete {
+  background-color: rgba(200,200,200,0.6);
+  border: 5px solid rgba(200,200,200,0.6);
+  border-radius: 50%;
+  border: none;
+  color: rgba(255,255,255,1);
+  margin: 0.3rem 0.5rem;
+  padding: 0.75rem;
+  z-index: 10;
+}
+
+#submit.submitting {
+  animation: 1s ease 0s infinite pulse;
+}
+
+@keyframes pulse {
+  0%{
+    background-color: rgba(200,200,200,0.6);
+    color: rgba(255,255,255,1);
+  }
+  50%{
+    background-color: rgba(200,200,200,1);
+    color: rgba(0,0,0,1);
+  }
+  100%{
+    background-color: rgba(200,200,200,0.6);
+    color: rgba(255,255,255,1);
+  }
+}

@@ -5,6 +5,15 @@ class App extends Component {
 
 
 
+  // moving the canvas position when clicked
+  toggleCanvasPosition = () => {
+    let canvasCont = document.getElementById('canvas_container'),
+    snapButton = document.getElementById('button');
+
+    canvasCont.classList.toggle('snapped');
+    snapButton.classList.toggle('snapped');
+  };
+
   snapPhoto = (width, height) => {
     let canvas = document.getElementById('canvas'),
         context = canvas.getContext('2d'),
@@ -21,7 +30,7 @@ class App extends Component {
     };
 
     context.drawImage(video, 0, 0, imageWidth, imageHeight);
-    // this.toggleCanvasPosition();
+    this.toggleCanvasPosition();
     // this.convertCanvasToImage(canvas);
   };
 
