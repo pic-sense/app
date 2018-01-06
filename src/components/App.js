@@ -135,8 +135,8 @@ class App extends Component {
 
     // for mobile use
     if(window.innerWidth <= 850) {
-      cameraOrientation = { facingMode: { exact: "environment" } }
-      // cameraOrientation = true;
+      // cameraOrientation = { facingMode: { exact: "environment" } }
+      cameraOrientation = true;
       canvas.width = window.innerWidth;
       canvas.height = window.innerHeight;
       video.width = window.innerWidth;
