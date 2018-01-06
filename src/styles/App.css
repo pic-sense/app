@@ -117,6 +117,7 @@ button:hover
 
 #loading {
   position: fixed;
+  z-index: 20;
 }
 
 #loading i {
