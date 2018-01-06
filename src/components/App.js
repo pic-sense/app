@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import '../styles/App.css';
-
+import PhotoTags from './PhotoTags';
 let rp = require('request-promise');
 
 class App extends Component {
@@ -176,7 +176,8 @@ class App extends Component {
             </button>
           </div>
 
-
+          <PhotoTags tags={this.state.imageTags} text={this.state.imageText}
+          speak={this.speak}  />
         </div>
 
         <div id="button">
