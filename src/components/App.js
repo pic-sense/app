@@ -172,7 +172,7 @@ class App extends Component {
           <canvas id="canvas" width='' height=''></canvas>
           <div id="canvasButtons">
             <button id="delete" onClick={() => this.removePhoto()}>
-            <i className="material-icons">delete</i>
+            <i className="material-icons">clear</i>
             </button>
             <button id="submit" onClick={() => this.submitPhoto()}>
               <i className="material-icons">send</i>
