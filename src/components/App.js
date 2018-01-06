@@ -115,7 +115,6 @@ class App extends Component {
       let synth = window.speechSynthesis;
       let voices = synth.getVoices();
       this.setState({voice: voices[50]});
-      console.log(voices[50]);
     });
   };
 
@@ -128,6 +127,7 @@ class App extends Component {
     synth.speak(msg);
   };
 
+  // triggered once component loads
   componentDidMount() {
     let video = document.getElementById('video'),
         canvas = document.getElementById('canvas');
@@ -154,7 +154,7 @@ class App extends Component {
       canvas.height = video.height;
     };
 
-    // triggering the getVoice function upon the component loading
+    // triggering the getVoice function
     this.getVoices();
   };
 
