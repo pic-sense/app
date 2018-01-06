@@ -115,6 +115,31 @@ button:hover
   text-align: center;
 }
 
+#loading {
+  position: fixed;
+}
+
+#loading i {
+  animation: 1s linear 0s infinite spin;
+  font-size: 60px;
+  color: white;
+}
+
+#loading p {
+  color: white;
+}
+
+#loading.loading {
+  top: 45%;
+  left: 0;
+  right: 0;
+}
+
+@keyframes spin {
+  from {transform:rotate(0deg);}
+  to {transform:rotate(-360deg);}
+}
+
 @media screen and (min-width: 800px) {
 
   .App {

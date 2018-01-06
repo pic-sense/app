@@ -63,8 +63,10 @@ class App extends Component {
 
   //submitting the converted image to Google Cloud Vision API
   submitPhoto = () => {
-    let submit = document.getElementById('submit');
+    let submit = document.getElementById('submit'),
+    loading = document.getElementById('loading');
     submit.classList.toggle('submitting');
+    loading.classList.toggle('loading');
 
     // Google Vision API request
     // fetch('https://vision.googleapis.com/v1/images:annotate?key=AIzaSyAS_9EhaNTu1UtMPgKfNQt8-fOpe8DExOI', {
@@ -96,8 +98,9 @@ class App extends Component {
       if (error) throw new Error(error);
       submit.classList.toggle('submitting');
     }).then(body => {
+        loading.classList.toggle('loading');
         this.setState({imageTags: body.responses[0].labelAnnotations});
-        this.speak(body.responses[0].labelAnnotations[0].description)
+        this.speak(body.responses[0].labelAnnotations[0].description);
       })
       .catch(err => {
         console.log("Error: ", err);
@@ -187,6 +190,11 @@ class App extends Component {
           <button id="snap" onClick={() => this.snapPhoto(window.innerWidth, window.innerHeight)}>
             <i className="material-icons">photo_camera</i>
           </button>
+        </div>
+
+        <div id="loading">
+          <i className="material-icons">sync</i>
+          <p>sending...</p>
         </div>
 
       </div>
