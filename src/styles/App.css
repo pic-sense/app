@@ -38,7 +38,7 @@ button:hover
   position: fixed;
   bottom: 0;
   width: 100%;
-  padding: 2rem 0rem;
+  padding: 0.75rem 0rem;
   transition: translate 0.3s;
 }
 
@@ -47,7 +47,7 @@ button:hover
   border: none;
   border: 5px solid white;
   border-radius: 50%;
-  color: black;
+  color: rgba(0,0,0,0.7);
   padding: 0.5rem;
 }
 
