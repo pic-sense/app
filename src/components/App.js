@@ -97,7 +97,7 @@ class App extends Component {
       submit.classList.toggle('submitting');
     }).then(body => {
         this.setState({imageTags: body.responses[0].labelAnnotations});
-        // this.speak(body.responses[0].labelAnnotations[0].description)
+        this.speak(body.responses[0].labelAnnotations[0].description)
       })
       .catch(err => {
         console.log("Error: ", err);
@@ -117,6 +117,15 @@ class App extends Component {
       this.setState({voice: voices[50]});
       console.log(voices[50]);
     });
+  };
+
+  // onclick speak the given text
+  speak = (text) => {
+    let synth = window.speechSynthesis;
+    let msg = new SpeechSynthesisUtterance();
+    msg.voice = this.state.voice;
+    msg.text = text;
+    synth.speak(msg);
   };
 
   componentDidMount() {
