@@ -105,6 +105,20 @@ class App extends Component {
 
   };
 
+  // getting the voice list from the speechSynthesis API
+  getVoices = () => {
+    let awaitVoices = new Promise(done =>
+    window.speechSynthesis.onvoiceschanged = done
+    );
+
+    awaitVoices.then(()=> {
+      let synth = window.speechSynthesis;
+      let voices = synth.getVoices();
+      this.setState({voice: voices[50]});
+      console.log(voices[50]);
+    });
+  };
+
   componentDidMount() {
     let video = document.getElementById('video'),
         canvas = document.getElementById('canvas');
@@ -132,7 +146,7 @@ class App extends Component {
     };
 
     // triggering the getVoice function upon the component loading
-    // this.getVoices();
+    this.getVoices();
   };
 
 
