@@ -17,7 +17,7 @@ export default class PhotoTags extends Component {
         scoreStyle = {backgroundColor: "rgba(255, 99, 71, 0.7)"}
       }
       return (
-        <div key={index} style={scoreStyle} className="imageTags" onClick={() => this.props.speak(tag.description)}>
+        <div key={index} style={scoreStyle} className="imageTags" onClick={() => this.props.speak(tag.description, this.props.voice)}>
           <h3>{tag.description}</h3><h5>{score.toFixed(0)}% sure</h5>
         </div>
       )

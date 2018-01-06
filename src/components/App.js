@@ -96,7 +96,7 @@ class App extends Component {
     }).then(body => {
         loading.classList.toggle('loading');
         this.setState({imageTags: body.responses[0].labelAnnotations});
-        this.speak(body.responses[0].labelAnnotations[0].description);
+        this.speak(body.responses[0].labelAnnotations[0].description, this.state.voice);
       })
       .catch(err => {
         console.log("Error: ", err);
@@ -113,15 +113,15 @@ class App extends Component {
     awaitVoices.then(()=> {
       let synth = window.speechSynthesis;
       let voices = synth.getVoices();
-      this.setState({voice: voices[50]});
+      this.setState({voice: voices[0]});
     });
   };
 
   // onclick speak the given text
-  speak = (text) => {
+  speak = (text, voice) => {
     let synth = window.speechSynthesis;
     let msg = new SpeechSynthesisUtterance();
-    msg.voice = this.state.voice;
+    msg.voice = voice;
     msg.text = text;
     synth.speak(msg);
   };
@@ -134,8 +134,7 @@ class App extends Component {
 
     // for mobile use
     if(window.innerWidth <= 850) {
-      // cameraOrientation = { facingMode: { exact: "environment" } }
-      cameraOrientation = true;
+      cameraOrientation = { facingMode: { exact: "environment" } }
       canvas.width = window.innerWidth;
       canvas.height = window.innerHeight;
       video.width = window.innerWidth;
@@ -184,7 +183,7 @@ class App extends Component {
             </button>
           </div>
 
-          <PhotoTags tags={this.state.imageTags} text={this.state.imageText}
+          <PhotoTags tags={this.state.imageTags} text={this.state.imageText} voice={this.state.voice}
           speak={this.speak}  />
         </div>
 
