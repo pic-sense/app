@@ -12,6 +12,15 @@ class App extends Component {
     }
   };
 
+  // converting the canvas image into base64
+  convertCanvasToImage = (canvas) => {
+    let image = new Image();
+
+    image.src = canvas.toDataURL("image/png");
+    let imgURL = image.src.replace("data:image/png;base64,", "")
+    this.setState({imageURL: imgURL});
+
+  };
 
   // moving the canvas position when clicked
   toggleCanvasPosition = () => {
@@ -39,7 +48,7 @@ class App extends Component {
 
     context.drawImage(video, 0, 0, imageWidth, imageHeight);
     this.toggleCanvasPosition();
-    // this.convertCanvasToImage(canvas);
+    this.convertCanvasToImage(canvas);
   };
 
   removePhoto = () => {
