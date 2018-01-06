@@ -154,6 +154,7 @@ class App extends Component {
       navigator.mediaDevices.getUserMedia({ video:  cameraOrientation })
         .then(function(stream) {
           video.src = window.URL.createObjectURL(stream);
+          video.srcObject = stream
           video.play();
         });
     };
