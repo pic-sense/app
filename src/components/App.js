@@ -134,7 +134,8 @@ class App extends Component {
 
     // getting device camera access
     if(navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
-      navigator.mediaDevices.getUserMedia({ video: true })
+      // console.log("Media Devices: ",navigator.mediaDevices.getUserMedia({video: { facingMode: { exact: "environment" } }}));
+      navigator.mediaDevices.getUserMedia({ video: { facingMode: { exact: "environment" } } })
         .then(function(stream) {
           video.src = window.URL.createObjectURL(stream);
           video.play();
