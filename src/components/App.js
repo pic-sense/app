@@ -130,29 +130,31 @@ class App extends Component {
   // triggered once component loads
   componentDidMount() {
     let video = document.getElementById('video'),
-        canvas = document.getElementById('canvas');
-
-    // getting device camera access
-    if(navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
-      // console.log("Media Devices: ",navigator.mediaDevices.getUserMedia({video: { facingMode: { exact: "environment" } }}));
-      navigator.mediaDevices.getUserMedia({ video: { facingMode: { exact: "environment" } } })
-        .then(function(stream) {
-          video.src = window.URL.createObjectURL(stream);
-          video.play();
-        });
-    };
+        canvas = document.getElementById('canvas'),
+        cameraOrientation;
 
     // for mobile use
     if(window.innerWidth <= 850) {
+      cameraOrientation = { facingMode: { exact: "environment" } }
       canvas.width = window.innerWidth;
       canvas.height = window.innerHeight;
       video.width = window.innerWidth;
       video.height = window.innerHeight;
     } else {
+      cameraOrientation = true;
       video.width = window.innerWidth / 2;
       video.height = 480;
       canvas.width = video.width;
       canvas.height = video.height;
+    };
+
+    // getting device camera access
+    if(navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+      navigator.mediaDevices.getUserMedia({ video:  cameraOrientation })
+        .then(function(stream) {
+          video.src = window.URL.createObjectURL(stream);
+          video.play();
+        });
     };
 
     // triggering the getVoice function
