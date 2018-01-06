@@ -121,7 +121,7 @@ class App extends Component {
   speak = (text, voice) => {
     let synth = window.speechSynthesis;
     let msg = new SpeechSynthesisUtterance();
-    msg.voice = voice;
+    // msg.voice = voice;
     msg.text = text;
     synth.speak(msg);
   };
