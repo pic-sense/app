@@ -43,11 +43,11 @@ button:hover
 }
 
 #snap {
-  background-color: rgba(200,200,200,0.5);
+  background-color: white;
   border: none;
   border: 5px solid white;
   border-radius: 50%;
-  color: white;
+  color: black;
   padding: 1rem;
 }
 
