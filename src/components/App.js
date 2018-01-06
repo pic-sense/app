@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import '../styles/App.css';
 
+let rp = require('request-promise');
+
 class App extends Component {
   constructor(props) {
     super(props)
@@ -57,6 +59,51 @@ class App extends Component {
       imageTags: [],
       imageText: []
     })
+  };
+
+  //submitting the converted image to Google Cloud Vision API
+  submitPhoto = () => {
+    let submit = document.getElementById('submit');
+    submit.classList.toggle('submitting');
+
+    // Google Vision API request
+    // fetch('https://vision.googleapis.com/v1/images:annotate?key=AIzaSyAS_9EhaNTu1UtMPgKfNQt8-fOpe8DExOI', {
+    //       method: "POST",
+    //       body: requestBody,
+    //       headers: {
+    //         'Content-Type': 'application/json'
+    //       }
+    //     })
+    //     .then(res => {
+    //       console.log("RESPONSE: ", res);
+    //     })
+    let options = { method: 'POST',
+      url: 'https://vision.googleapis.com/v1/images:annotate',
+      qs: { key: 'AIzaSyAS_9EhaNTu1UtMPgKfNQt8-fOpe8DExOI' },
+      headers:
+       {
+         'Content-Type': 'application/json' },
+      body:
+       { requests:
+          [ { image: { content: `${this.state.imageURL}` },
+              features: [
+                { type: 'LABEL_DETECTION', maxResults: 5 },
+                { type: 'TEXT_DETECTION', maxResults: 5 }
+               ] } ] },
+      json: true };
+
+    rp(options, function (error, response, body) {
+      if (error) throw new Error(error);
+      submit.classList.toggle('submitting');
+    }).then(body => {
+        this.setState({imageTags: body.responses[0].labelAnnotations});
+        console.log(body.responses[0].labelAnnotations);
+        // this.speak(body.responses[0].labelAnnotations[0].description)
+      })
+      .catch(err => {
+        console.log("Error: ", err);
+      });
+
   };
 
   componentDidMount() {
