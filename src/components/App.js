@@ -1,42 +1,59 @@
 import React, { Component } from 'react';
-import logo from '../logo.svg';
 import '../styles/App.css';
 
 class App extends Component {
 
 
 
+  snapPhoto = (width, height) => {
+    let canvas = document.getElementById('canvas'),
+        context = canvas.getContext('2d'),
+        video = document.getElementById('video'),
+        imageWidth,
+        imageHeight;
 
+    if (width <= 850) {
+      imageWidth = width;
+      imageHeight = height;
+    } else {
+      imageWidth = width / 2;
+      imageHeight = height / 1.45;
+    };
+
+    context.drawImage(video, 0, 0, imageWidth, imageHeight);
+    // this.toggleCanvasPosition();
+    // this.convertCanvasToImage(canvas);
+  };
 
   componentDidMount() {
-  let video = document.getElementById('video'),
-      canvas = document.getElementById('canvas');
+    let video = document.getElementById('video'),
+        canvas = document.getElementById('canvas');
 
-  // getting device camera access
-  if(navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
-    navigator.mediaDevices.getUserMedia({ video: true })
-      .then(function(stream) {
-        video.src = window.URL.createObjectURL(stream);
-        video.play();
-      });
+    // getting device camera access
+    if(navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+      navigator.mediaDevices.getUserMedia({ video: true })
+        .then(function(stream) {
+          video.src = window.URL.createObjectURL(stream);
+          video.play();
+        });
+    };
+
+    // for mobile use
+    if(window.innerWidth <= 850) {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+      video.width = window.innerWidth;
+      video.height = window.innerHeight;
+    } else {
+      video.width = window.innerWidth / 2;
+      video.height = 480;
+      canvas.width = video.width;
+      canvas.height = video.height;
+    };
+
+    // triggering the getVoice function upon the component loading
+    // this.getVoices();
   };
-
-  // for mobile use
-  if(window.innerWidth <= 850) {
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
-    video.width = window.innerWidth;
-    video.height = window.innerHeight;
-  } else {
-    video.width = window.innerWidth / 2;
-    video.height = 480;
-    canvas.width = video.width;
-    canvas.height = video.height;
-  };
-
-  // triggering the getVoice function upon the component loading
-  // this.getVoices();
-};
 
 
   render() {
@@ -60,7 +77,9 @@ class App extends Component {
         </div>
 
         <div id="button">
-
+          <button id="snap" onClick={() => this.snapPhoto(window.innerWidth, window.innerHeight)}>
+            <i className="material-icons">photo_camera</i>
+          </button>
         </div>
 
       </div>
