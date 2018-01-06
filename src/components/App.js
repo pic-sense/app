@@ -97,7 +97,6 @@ class App extends Component {
       submit.classList.toggle('submitting');
     }).then(body => {
         this.setState({imageTags: body.responses[0].labelAnnotations});
-        console.log(body.responses[0].labelAnnotations);
         // this.speak(body.responses[0].labelAnnotations[0].description)
       })
       .catch(err => {
