@@ -48,7 +48,7 @@ button:hover
   border: 5px solid white;
   border-radius: 50%;
   color: black;
-  padding: 1rem;
+  padding: 0.5rem;
 }
 
 #snap i, #submit i, #delete i {
