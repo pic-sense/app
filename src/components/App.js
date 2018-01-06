@@ -150,7 +150,7 @@ class App extends Component {
 
     // getting device camera access
     if(navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
-      navigator.mediaDevices.getUserMedia({ video:  cameraOrientation })
+      navigator.mediaDevices.getUserMedia({ audio: false, video:  cameraOrientation })
         .then(function(stream) {
           if ("srcObject" in video) {
               video.srcObject = stream;
@@ -171,7 +171,7 @@ class App extends Component {
     return (
       <div className="App">
 
-        <video id="video" width='' height='' autoPlay></video>
+        <video id="video" width='' height='' autoPlay playsInline></video>
 
         <div id="canvas_container">
           <canvas id="canvas" width='' height=''></canvas>
