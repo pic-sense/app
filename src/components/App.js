@@ -166,7 +166,7 @@ class App extends Component {
     return (
       <div className="App">
 
-        <video id="video" width='' height='' autoPlay></video>
+        <video id="video" width='' height='' autoPlay playsInline></video>
 
         <div id="canvas_container">
           <canvas id="canvas" width='' height=''></canvas>
