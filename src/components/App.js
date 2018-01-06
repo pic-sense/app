@@ -63,9 +63,7 @@ class App extends Component {
 
   //submitting the converted image to Google Cloud Vision API
   submitPhoto = () => {
-    let submit = document.getElementById('submit'),
-    loading = document.getElementById('loading');
-    submit.classList.toggle('submitting');
+    let loading = document.getElementById('loading');
     loading.classList.toggle('loading');
 
     // Google Vision API request
@@ -96,7 +94,6 @@ class App extends Component {
 
     rp(options, function (error, response, body) {
       if (error) throw new Error(error);
-      submit.classList.toggle('submitting');
     }).then(body => {
         loading.classList.toggle('loading');
         this.setState({imageTags: body.responses[0].labelAnnotations});
