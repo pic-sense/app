@@ -2,7 +2,15 @@ import React, { Component } from 'react';
 import '../styles/App.css';
 
 class App extends Component {
-
+  constructor(props) {
+    super(props)
+    this.state = {
+      imageURL: '',
+      imageTags: [],
+      imageText: [],
+      voice: {}
+    }
+  };
 
 
   // moving the canvas position when clicked
@@ -32,6 +40,14 @@ class App extends Component {
     context.drawImage(video, 0, 0, imageWidth, imageHeight);
     this.toggleCanvasPosition();
     // this.convertCanvasToImage(canvas);
+  };
+
+  removePhoto = () => {
+    this.toggleCanvasPosition();
+    this.setState({
+      imageTags: [],
+      imageText: []
+    })
   };
 
   componentDidMount() {
