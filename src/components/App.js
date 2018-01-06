@@ -21,7 +21,6 @@ class App extends Component {
     image.src = canvas.toDataURL("image/png");
     let imgURL = image.src.replace("data:image/png;base64,", "")
     this.setState({imageURL: imgURL});
-
   };
 
   // moving the canvas position when clicked
@@ -153,9 +152,14 @@ class App extends Component {
     if(navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
       navigator.mediaDevices.getUserMedia({ video:  cameraOrientation })
         .then(function(stream) {
-          video.src = window.URL.createObjectURL(stream);
-          video.srcObject = stream
-          video.play();
+          if ("srcObject" in video) {
+              video.srcObject = stream;
+            } else {
+              video.src = window.URL.createObjectURL(stream);
+            }
+            video.onloadedmetadata = function(e) {
+              video.play();
+            };
         });
     };
 
@@ -167,13 +171,13 @@ class App extends Component {
     return (
       <div className="App">
 
-        <video id="video" width='' height='' autoPlay playsInline></video>
+        <video id="video" width='' height='' autoPlay></video>
 
         <div id="canvas_container">
           <canvas id="canvas" width='' height=''></canvas>
           <div id="canvasButtons">
             <button id="delete" onClick={() => this.removePhoto()}>
-            <i className="material-icons">clear</i>
+            <i className="material-icons">delete</i>
             </button>
             <button id="submit" onClick={() => this.submitPhoto()}>
               <i className="material-icons">send</i>
